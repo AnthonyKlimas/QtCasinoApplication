@@ -1,6 +1,8 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-void login();
+#include <string>
+
+void login(std::string&, std::string&, float&);
 
 #endif

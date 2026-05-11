@@ -3,34 +3,56 @@
 #include <ctime>
 #include <string>
 #include "login.h"
+#include "mysql_connector.h"
 
 using namespace std;
+
+void black_jack(string, float&);
 
 
 int main()
 { 
-    int selection;
-    int money = 0;
-    int table;
-    int spin;
+
+    float Balance;
+    string Username;
+    string Password;
 
 srand(time(0));
 
 //Login to user account
-login();
+login(Username, Password, Balance);
 
-//Keeps track of money with text file
-ifstream infile("data/money.txt");
-
-if(infile)
-{
-    infile >> money;
-}
-
-infile.close();
 
     cout << "Welcome to Docker Casino!" << endl;
-    cout << "Your Balance is " << money << endl;
+    cout << "Your Balance is " << Balance << endl;
+
+    black_jack(Username, Balance);
+
+}
+
+void black_jack(string user, float& bal)
+{
+    float wager;
+    int selection;
+    int table;
+    int spin;
+    int playagain;
+
+
+
+    while(true)
+    {
+        cout << "How much would you like to bet?" << endl;
+        cin >> wager;
+        if(wager > bal || wager <= 0)
+        {
+            cout << "Not a valid bet" << endl;
+    
+        } else
+        {
+            break;
+        }
+    }
 
     cout << "What will you select?" << endl;
     cout << "Select (1) = Black | Select (0) = Red" << endl;
@@ -51,19 +73,24 @@ infile.close();
     if(table == selection)
     {
         cout << "You Win!" << endl;
-        money += 10;
+        bal += wager;
+        editbalanceDatabase(user, bal);
     }else
     {
         cout << "You Lose!" << endl;
-        money -= 10;
+        bal -= wager;
+        editbalanceDatabase(user, bal);
     }
 
-    cout << "Your amount is " << money << endl;
+    cout << "Your amount is " << bal << endl;
 
-    ofstream outfile("data/money.txt");
+    cout << "Play Again?" << endl;
+    cout << "Select (1) = Yes | Select (0) = No" << endl;
+    cin >> playagain; 
+    if(playagain == 1)
+    {
+        black_jack(user, bal);
+    }
 
-    outfile << money;
-
-    outfile.close();
 
 }

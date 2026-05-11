@@ -6,9 +6,9 @@
 using namespace std;
 
 void createLogin();
-void signIn();
+void signIn(string&, string&, float&);
 
-void login()
+void login(string& username, string& password, float& balance)
 {
     int choice;
 
@@ -23,11 +23,11 @@ void login()
         if(choice == 1)
         {
             createLogin();
-            signIn();
+            signIn(username, password, balance);
 
         } else
         {
-            signIn();
+            signIn(username, password, balance);
             
         }
 
@@ -47,15 +47,12 @@ void createLogin()
 
     cout << "Username and Password have been created!" << endl;
 
-    writetoDatabase(user, pass, 100);
+    writetoDatabase(user, pass, 100.50);
 
 }
 
-void signIn()
+void signIn(string& inputUsername, string& inputPassword, float& bal)
 {
-
-string inputUsername;
-string inputPassword;
 
     while(true)
     {
@@ -66,9 +63,9 @@ string inputPassword;
         cout << "Input password: " << endl;
         cin >> inputPassword;
 
-        readtoDatabase(inputUsername, inputPassword);
+        readtoDatabase(inputUsername, inputPassword, bal);
 
-            if(readtoDatabase(inputUsername, inputPassword))
+            if(readtoDatabase(inputUsername, inputPassword, bal))
             {
                 cout << "Login Successful!" << endl;
                 break;

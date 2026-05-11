@@ -7,7 +7,8 @@
 
 //function defintions
 sql::Connection* database();
-void writetoDatabase(std::string, std::string, int);
-bool readtoDatabase(std::string, std::string);
+void writetoDatabase(std::string, std::string, float);
+bool readtoDatabase(std::string, std::string, float&);
+void editbalanceDatabase(std::string, float);
 
 #endif

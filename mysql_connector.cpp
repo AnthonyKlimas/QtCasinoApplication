@@ -33,7 +33,7 @@ Connection* database()
 
 }
 
-void writetoDatabase(string username, string password, int balance)
+void writetoDatabase(string username, string password, float balance)
 {
     //Creates Connection and statement objects
     Connection* con;
@@ -58,7 +58,7 @@ void writetoDatabase(string username, string password, int balance)
     delete con;
 }
 
-bool readtoDatabase(string username, string password)
+bool readtoDatabase(string username, string password, float& balance)
 {
     ResultSet* res;
     Connection* con;
@@ -77,16 +77,42 @@ res = stmt->executeQuery(query);
 
 if(res->next())
 {
+    balance = res->getDouble("balance");
+
+    delete res;
+    delete stmt;
+    delete con;
+
     return true;
 }
 else
 {
+    delete res;
+    delete stmt;
+    delete con;
+
     return false;
 }
 
-delete res;
-delete stmt;
-delete con;
 
+}
 
+void editbalanceDatabase(string username, float bal)
+{
+    Connection* con;
+    Statement* stmt;
+
+    con = database();
+
+    stmt = con->createStatement();
+
+    string query = 
+        "UPDATE users "
+        "SET balance = " + to_string(bal) +
+        " WHERE username = '" + username + "'";
+
+    stmt->execute(query);
+
+    delete stmt;
+    delete con;
 }
