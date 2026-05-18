@@ -1,24 +1,18 @@
 services:
-  casino-app:
-    build: .
-    command: ["./casino"]
-    stdin_open: true
-    tty: true
-    container_name: casino-app
-    depends_on:
-      - mysql-db
 
   mysql-db:
     image: mysql:8.0
     container_name: mysql-db
     restart: always
 
+    command: --default-authentication-plugin=mysql_native_password
+
     environment:
       MYSQL_ROOT_PASSWORD: AKsoccer47
       MYSQL_DATABASE: casino
 
     ports:
-      - "3307:3307"
+      - "3307:3306"
 
     volumes:
       - mysql-data:/var/lib/mysql

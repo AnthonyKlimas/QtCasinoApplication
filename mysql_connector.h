@@ -2,13 +2,18 @@
 #define MYSQL_CONNECTOR_H
 
 #include <string>
-#include <mysql_driver.h>
-#include <mysql_connection.h>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariant>
+#include <QDebug>
+#include <QCoreApplication>
 
 //function defintions
-sql::Connection* database();
-void writetoDatabase(std::string, std::string, float);
-bool readtoDatabase(std::string, std::string, float&);
-void editbalanceDatabase(std::string, float);
+QSqlDatabase database();
+bool writetoDatabase(std::string, std::string, float);
+bool readtoDatabase(std::string, std::string);
+bool editbalanceDatabase(std::string, float);
+float getbalanceDatabase(std::string, std::string);
 
 #endif

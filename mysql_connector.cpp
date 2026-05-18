@@ -1,118 +1,155 @@
 #include <iostream>
 
 //SQL libraries and C++ Connections
-#include <mysql_driver.h>
-#include <mysql_connection.h>
-#include <cppconn/statement.h>
-#include <cppconn/resultset.h>
-
-using namespace sql;
-using namespace mysql;
+#include "mysql_connector.h"
 using namespace std;
 
-Connection* database()
+QSqlDatabase database()
 {
-    //Creates Driver and Connection objects
-    MySQL_Driver* driver;
-    Connection* con;
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 
-    //Gets driver instance from connector library
-    driver = get_mysql_driver_instance();
+    db.setHostName("127.0.0.1");
+    db.setPort(3307);
 
-    //Connects to MySQL database server automatically
-    con = driver->connect(
-        "tcp://mysql-db:3306",
-        "root",
-        "AKsoccer47"
+    db.setDatabaseName("casino");
+
+    db.setUserName("root");
+    db.setPassword("AKsoccer47");
+
+    if(!db.open())
+    {
+        qDebug() << "Database Error:" << db.lastError();
+
+        qDebug() << "Driver Text:" << db.lastError().driverText();
+
+        qDebug() << "Database Text:" << db.lastError().databaseText();
+    }
+    else
+    {
+        qDebug()
+            << "Database connected!";
+    }
+
+    return db;
+}
+
+bool writetoDatabase(string username, string password, float balance)
+{
+    QSqlDatabase db = database();
+
+    if(!db.isOpen())
+    {
+        return false;
+    }
+
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO users ""(username, password, balance) ""VALUES (:username, :password, :balance)");
+
+    query.bindValue(
+        ":username",
+        QString::fromStdString(username)
     );
 
-    //Tells MySQL to use the casino database
-    con->setSchema("casino");
+    query.bindValue(
+        ":password",
+        QString::fromStdString(password)
+    );
 
-    return con;
+    query.bindValue(
+        ":balance",
+        balance
+    );
 
-}
+    if(!query.exec())
+    {
+        qDebug()
+            << query.lastError().text();
 
-void writetoDatabase(string username, string password, float balance)
-{
-    //Creates Connection and statement objects
-    Connection* con;
-    Statement* stmt;
-
-    //Uses casino database
-    con = database();
-
-    stmt = con->createStatement();
-
-    //Creates string that is formatted correctly for Username, Password, and Balance to be inserted into database
-    string query =
-        "INSERT INTO users(username, password, balance) "
-        "VALUES('" + username + "', '" +
-        password + "', " +
-        to_string(balance) + ")";
-
-    //Inserts data into database
-    stmt->execute(query);
-
-    delete stmt;
-    delete con;
-}
-
-bool readtoDatabase(string username, string password, float& balance)
-{
-    ResultSet* res;
-    Connection* con;
-    Statement* stmt;
-
-    con = database();
-
-    stmt = con->createStatement();
-
-    string query =
-    "SELECT * FROM users "
-    "WHERE username='" + username + 
-    "' AND password = '" + password + "'";
-
-res = stmt->executeQuery(query);
-
-if(res->next())
-{
-    balance = res->getDouble("balance");
-
-    delete res;
-    delete stmt;
-    delete con;
+        return false;
+    }
 
     return true;
 }
-else
+
+bool readtoDatabase(string username, string password)
 {
-    delete res;
-    delete stmt;
-    delete con;
+    QSqlDatabase db = database();
+
+    if(!db.isOpen())
+    {
+        return false;
+    }
+
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM users " "WHERE username = :username " "AND password = :password");
+
+    query.bindValue(
+        ":username",
+        QString::fromStdString(username)
+    );
+
+    query.bindValue(
+        ":password",
+        QString::fromStdString(password)
+    );
+
+    if(query.exec() && query.next())
+    {
+        return true;
+    }
 
     return false;
 }
 
 
-}
-
-void editbalanceDatabase(string username, float bal)
+bool editbalanceDatabase(string username, float bal)
 {
-    Connection* con;
-    Statement* stmt;
+    QSqlDatabase db = database();
 
-    con = database();
+    if(!db.isOpen())
+    {
+        return false;
+    }
 
-    stmt = con->createStatement();
+    QSqlQuery query;
 
-    string query = 
-        "UPDATE users "
-        "SET balance = " + to_string(bal) +
-        " WHERE username = '" + username + "'";
+    query.prepare("UPDATE users " "SET balance = :balance " "WHERE username = :username");
 
-    stmt->execute(query);
+    query.bindValue(":balance", bal);
 
-    delete stmt;
-    delete con;
+    query.bindValue(":username", QString::fromStdString(username));
+
+    if(!query.exec())
+    {
+        qDebug()
+            << query.lastError().text();
+
+        return false;
+    }
+
+    return true;
 }
+
+float getbalanceDatabase(string username, string password)
+{
+    QSqlDatabase db = database();
+
+    QSqlQuery query;
+
+    query.prepare("SELECT balance FROM users " "WHERE username = :username " "AND password = :password");
+
+    query.bindValue(":username", QString::fromStdString(username));
+
+    query.bindValue(":password", QString::fromStdString(password));
+
+    if(query.exec() && query.next())
+    {
+        return query.value(0).toFloat();
+    }
+
+    return false;
+
+}
+
