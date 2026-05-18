@@ -107,10 +107,10 @@ I created this script to automatically
 ---
 
 ##Author
-Anthony Klimas
-Computer Science Major
-Mathematics Minor
-University of Massachusetts Lowell
+Anthony Klimas  
+Computer Science Major  
+Mathematics Minor  
+University of Massachusetts Lowell  
 
 
 
