@@ -106,7 +106,7 @@ I created this script to automatically
 
 ---
 
-##Author
+## Author
 Anthony Klimas  
 Computer Science Major  
 Mathematics Minor  
