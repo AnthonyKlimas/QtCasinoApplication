@@ -8,13 +8,15 @@ The project combines a modern Qt graphical user interface with a Dockerized MySQ
 ## Application Preview
 
 ### Main Menu
-![Main Menu](assets/screenshots/mainmenu.png)
+![Masrin Menu](assets/screenshots/mainmenu.png)
 
 ### Blackjack Gameplay
 ![Blackjack](assets/screenshots/blackjack.png)
 
 ### Login System
 ![Login](assets/screenshots/login.png)
+
+---
 
 ## Technical Skills Demonstrated
 - Object-Oriented Programming (OOP)
