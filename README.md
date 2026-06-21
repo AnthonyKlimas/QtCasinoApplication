@@ -96,7 +96,7 @@ Back-end Infrastructure:
 - Docker Desktop Installed
 
 ### Startup
-1. Download QtCasino_Deploy.zip
+1. Download QtCasino_Deploy.zip in Releases Page
 2. Extract folder
 3. Run StartCasino.bat
 
