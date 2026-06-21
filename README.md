@@ -8,10 +8,10 @@ The project combines a modern Qt graphical user interface with a Dockerized MySQ
 ## Application Preview
 
 ### Main Menu
-![Main Menu](assets/screenshots/mainmenu.png)
+![Main Menu](assets/screenshots/mainmenu.gif)
 
 ### Blackjack Gameplay
-![Blackjack](assets/screenshots/blackjack.png)
+![Blackjack](assets/screenshots/gameplay.gif)
 
 ### Login System
 ![Login](assets/screenshots/login.png)
