@@ -14,7 +14,7 @@ The project combines a modern Qt graphical user interface with a Dockerized MySQ
 ![Blackjack](assets/screenshots/gameplay.gif)
 
 ### Login System
-![Login](assets/screenshots/login.png)
+![Login](assets/screenshots/login.gif)
 
 ---
 
