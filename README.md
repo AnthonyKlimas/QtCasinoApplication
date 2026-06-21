@@ -8,7 +8,7 @@ The project combines a modern Qt graphical user interface with a Dockerized MySQ
 ## Application Preview
 
 ### Main Menu
-![Masrin Menu](assets/screenshots/mainmenu.png)
+![Main Menu](assets/screenshots/mainmenu.png)
 
 ### Blackjack Gameplay
 ![Blackjack](assets/screenshots/blackjack.png)
@@ -71,7 +71,7 @@ UI that can be easily traversed by the user.
 
 - User Authentication system
 - Persistent database-backed account storage using MySQL
-- Blackjack gameplay system devloped in C++ using OOP
+- Blackjack gameplay system developed in C++ using OOP
 - Automated Docker container startup/shutdown
 
 ---
@@ -84,7 +84,7 @@ Front-end Infrastructure:
 Back-end Infrastructure:
 - Dockerized MySQL database
 - SQL database storage
-- SQL initalization scripts
+- SQL initialization scripts
 - C++ OOP design application logic
 
 ---
@@ -104,7 +104,7 @@ I created this script to automatically
 - Start Docker Desktop
 - Launch the MySQL container
 - Opens the QtCasino Application
-- Stops the cotnainer when the application closes
+- Stops the contnainer when the application closes
 
 ---
 
