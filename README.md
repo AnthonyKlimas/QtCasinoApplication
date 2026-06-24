@@ -38,19 +38,21 @@ for user credentials and account balances. The project combines a modern Qt grap
 ### User Interface Development
 Purpose: Build a modern desktop user interface
 <br>
-Most Relevant Files: [Main QML](QTCasino_Source/main.qml), [QML QRC](QTCasino_Source/qml.qrc)
+Most Relevant Files: [main.qml](QtCasino_Source/main.qml), [qml.qrc](QtCasino_Source/qml.qrc)
 - Developed the graphical user interface using Qt Quick and QML
 - Created reusable UI components and responsive layouts.
 - Implemented event-driven interactions using Qt Signals and Slots.
 
 <p>
-    <img src="assets/images/athena.gif" width="400">
+    <img src="assets/images/athena.gif" width="200">
 </p>
+
+↓
 
 ### Game Logic Development
 Purpose: Implement Casino Game Functionality
 <br>
-Most Relevant File: [blackjack.cpp](QTCasino_Source/blackjack.cpp), [blackjack.h](QTCasino_Source/blackjack.h)
+Most Relevant File: [blackjack.cpp](QtCasino_Source/blackjack.cpp), [blackjack.h](QtCasino_Source/blackjack.h)
 - Developed object-oriented C++ classes for casino games.
 - Implemented game rules, betting logic, and balance management.
 - Utilized encapsulation and class inheritance to organize application logic.
@@ -68,7 +70,7 @@ struct Card
 ### Database Integration
 Purpose: Persist user account information
 <br>
-Relevant Files: [mysql_connector.cpp](QTCasino_Source/mysql_connector.cpp), [mysql_connector.h](QTCasino_Source/mysql_connector.h)
+Relevant Files: [mysql_connector.cpp](QtCasino_Source/mysql_connector.cpp), [mysql_connector.h](QtCasino_Source/mysql_connector.h)
 - Integrated a MySQL database using the Qt SQL module.
 - Stored user credentials and account balances.
 - Implemented SQL queries for account creation, login, and balance updates.
@@ -93,7 +95,13 @@ Purpose: Package and automeate deployment for users
 - Developed Windows batch script to automate application startup and shutdown
 - Automatically launched Docker Desktop and verified Docker availability
 - Started the MySQL container before launching the QtCasino application.
+```batch
+:waitdocker
+docker info >nul 2>&1
 
+echo Starting MySQL container...
+docker compose up -d
+```
 ---
 
 ## Features
