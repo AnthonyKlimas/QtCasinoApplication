@@ -1,7 +1,8 @@
 # Full-Stack C++ Casino Application
 
-QtCasino is a desktop casino application built with Qt Creator which uses technologies such as C++, Qt/QML, Docker and MySQL.
-The project combines a modern Qt graphical user interface with a Dockerized MySQL backend to create a fully deployable full-stack desktop application.
+QtCasino is a desktop casino game built with the Qt Creator IDE that uses the Qt framework to create a fully functional C++ application. The Qt framework consists of modules
+such as Qt Core, Qt SQL and Qt Quick which all work together to support QtCasino's architecture. The project also uitlizes a dockerized MySQL database to create a persistent data storage
+for user credentials and account balances. The project combines a modern Qt graphical user interface with a dockerized MySQL backend to create a fully deployable full-stack desktop application.
 
 ---
 
@@ -19,51 +20,79 @@ The project combines a modern Qt graphical user interface with a Dockerized MySQ
 ---
 
 ## Technical Skills Demonstrated
+
 - Object-Oriented Programming (OOP)
-- GUI Development
-- Full-Stack Application Architecture
-- Database Integration
+- GUI Development with Qt Quick and QML
+- Full-Stack Desktop Application Architecture
+- Database Design & Integration
 - Docker Containerization
 - SQL Database Management
 - Event-Driven Programming
-- Frontend/Backend Integration
+- Client-Server Communication
 - Windows Application Deployment
 
 ---
 
-## Technologies & Concepts Explained
-This application uses many complicated technologies and concepts to create a fully functional application that has a professionally made
-UI that can be easily traversed by the user.
+## Development Pipeline
 
-### C++
-- Developed the backend using C++ which uses Object-Oriented Programming concepts like inheritance, abstraction and encapsulation. 
-- Created custom classes and objects to create a backend that would mathematically make the game work properly.
-- Integrated backend database communication using Qt SQL and MySQL database drivers
+### User Interface Development
+Purpose: Build a modern desktop user interface
+<br>
+Most Relevant Files: [Main QML](QTCasino_Source/main.qml), [QML QRC](QTCasino_Source/qml.qrc)
+- Developed the graphical user interface using Qt Quick and QML
+- Created reusable UI components and responsive layouts.
+- Implemented event-driven interactions using Qt Signals and Slots.
 
-### Qt/QML
-- Developed a desktop graphical user interface using Qt Quick/QML integrated with C++ backend application logic
-- Implemented event-driven programming concepts using Qt signals, slots, and QML UI interactions
-- Connected QML frontend components with object-oriented C++ backend systems for game logic and database communication
-- Utilized Qt SQL modules to support persistent database-backed user authentication
-- Packaged and deployed a standalone Windows Qt application using windeployqt and Qt runtime dependencies
-- Designed modular UI/backend architecture separating frontend presentation logic from backend application systems
+<p>
+    <img src="assets/images/athena.gif" width="400">
+</p>
 
-### MySQL
-- Designed and implemented a relational MySQL database system for persistent user authentication and account data storage
-- Stored and managed user account information including usernames, passwords, and balances
-- Integrated MySQL database connectivity into a Qt/C++ desktop application using the Qt SQL module
-- Developed SQL initialization scripts to automatically create and configure database schemas during container startup
-- Containerized the MySQL backend using Docker for simplified deployment and environment consistency
-- Configured database communication between a Dockerized backend and Qt/QML frontend application
-- Managed persistent user data through SQL queries and backend database operations
+### Game Logic Development
+Purpose: Implement Casino Game Functionality
+<br>
+Most Relevant File: [blackjack.cpp](QTCasino_Source/blackjack.cpp), [blackjack.h](QTCasino_Source/blackjack.h)
+- Developed object-oriented C++ classes for casino games.
+- Implemented game rules, betting logic, and balance management.
+- Utilized encapsulation and class inheritance to organize application logic.
+```cpp
+struct Card
+{
+    std::string suit;
+    std::string rank;
+    int value;
+};
+```
 
-### Docker
-- Containerized the MySQL backend using Docker to create a portable database environment
-- Configured Docker Compose services to automate MySQL database deployment and initialization
-- Implemented automated startup and shutdown workflows connecting the Qt desktop application with the Dockerized backend
-- Utilized SQL initialization scripts during container creation to automatically configure database schemas and tables
-- Managed persistent database storage through Docker volume configuration
-- Integrated containerized backend services with a Qt/C++ frontend application for local full-stack deployment
+↓
+
+### Database Integration
+Purpose: Persist user account information
+<br>
+Relevant Files: [mysql_connector.cpp](QTCasino_Source/mysql_connector.cpp), [mysql_connector.h](QTCasino_Source/mysql_connector.h)
+- Integrated a MySQL database using the Qt SQL module.
+- Stored user credentials and account balances.
+- Implemented SQL queries for account creation, login, and balance updates.
+```cpp
+QSqlQuery query;
+query.prepare("SELECT * FROM users " "WHERE username = :username " "AND password = :password");
+```
+↓
+
+### Docker Containerization
+Purpose: Create a portable database environment
+<br>
+Relevant Files: [docker](docker/docker-compose.yml), [init.sql](sql/init.sql)
+- Containerized the MySQL database using Docker.
+- Automated database creation through initialization scripts.
+- Created a reproducible development and deployment environment.
+
+↓
+
+### Desktop Application Deployment
+Purpose: Package and automeate deployment for users
+- Developed Windows batch script to automate application startup and shutdown
+- Automatically launched Docker Desktop and verified Docker availability
+- Started the MySQL container before launching the QtCasino application.
 
 ---
 
