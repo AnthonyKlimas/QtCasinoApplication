@@ -92,6 +92,8 @@ Relevant Files: [docker](docker/docker-compose.yml), [init.sql](sql/init.sql)
 
 ### Desktop Application Deployment
 Purpose: Package and automeate deployment for users
+<br>
+Relevant Files: [StartCasino.bat](scripts/StartCasino.bat)
 - Developed Windows batch script to automate application startup and shutdown
 - Automatically launched Docker Desktop and verified Docker availability
 - Started the MySQL container before launching the QtCasino application.
@@ -104,25 +106,11 @@ docker compose up -d
 ```
 ---
 
-## Features
+## System Architecture
 
-- User Authentication system
-- Persistent database-backed account storage using MySQL
-- Blackjack gameplay system developed in C++ using OOP
-- Automated Docker container startup/shutdown
-
----
-
-## Architecture
-
-Front-end Infrastructure:
-- Qt / QML front-end using qrc and main.qml
-
-Back-end Infrastructure:
-- Dockerized MySQL database
-- SQL database storage
-- SQL initialization scripts
-- C++ OOP design application logic
+This application starts with a bat file that automatically runs docker and the applicationfor the user. Docker containerizes the MySQL database
+for persistent data storage, and QtCasino.exe launches the front end User interface using QML and C++.
+![System Architecture](assets/screenshots/system_architecture.png)
 
 ---
 
